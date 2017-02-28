@@ -1,0 +1,22 @@
+{
+  "name": "facebookbot",
+  "version": "1.0.0",
+  "description": "facebook bot",
+  "dependencies": {
+    "express": "4.14.1"    
+  },
+  "main": "index.js",
+  "engines": {
+      "node": "0.12.2",
+      "npm": "2.7.4"
+    },
+  "keywords": [
+    "bot"
+  ],
+  "author": "Kevin Jones",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/crow131/facebookbot/blob/master/README.md"
+  },
+  "homepage": "https://github.com/crow131/facebookbot/blob/master/README.md"
+}
