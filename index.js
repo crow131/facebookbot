@@ -36,43 +36,17 @@ app.post('/webhook/', function (req, res) {
         sender = event.sender.id
         if (event.message && event.message.text) {
             text = event.message.text
-            if (text === 'Generic' || text === 'generic') {
+            if (text === 'Generic') {
                 sendGenericMessage(sender)
                 continue
             }
             sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
-        }
-        if (event.postback) {
-            text = JSON.stringify(event.postback)
-            sendTextMessage(sender, "Postback received: " + text.substring(0, 200), token)
-            continue
         }
     }
     res.sendStatus(200)
 })
 
 var token = "EAALfyePA9ZCIBAG8FedZBnIPLxSpFLKgdCwRVozoOx90iZA9DU3a5d5tMnnZAUu5cZCb3sItvaxv7PKaUtx9KZBUFS6odRVe5PJRwiVHm5jzO6MgbVat6P2bCaXlJFt0pHTImztmJREBrQ360Oj4dgdBAleQ1qUke2WdbRl6VCnQZDZD"
-
-function sendTextMessage(sender, text) {
-    messageData = {
-        text:text
-    }
-    request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token:token},
-        method: 'POST',
-        json: {
-            recipient: {id:sender},
-            message: messageData,
-        }
-    }, function(error, response, body) {
-        if (error) {
-            console.log('Error sending messages: ', error)
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error)
-        }
-    })
-}
 
 function sendGenericMessage(sender) {
     messageData = {
@@ -122,3 +96,25 @@ function sendGenericMessage(sender) {
         }
     })
 }
+
+function sendTextMessage(sender, text) {
+    messageData = {
+        text:text + ' - bot'
+    }
+    request({
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: {access_token:token},
+        method: 'POST',
+        json: {
+            recipient: {id:sender},
+            message: messageData,
+        }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending messages: ', error)
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error)
+        }
+    })
+}
+
