@@ -36,7 +36,7 @@ app.post('/webhook/', function (req, res) {
         sender = event.sender.id
         if (event.message && event.message.text) {
             text = event.message.text
-            if (text === 'Generic') {
+            if (text === 'Generic' || text === 'generic') {
                 sendGenericMessage(sender)
                 continue
             }
@@ -44,13 +44,12 @@ app.post('/webhook/', function (req, res) {
         }
         if (event.postback) {
             text = JSON.stringify(event.postback)
-            sendTextMessage(sender, "Postback received: "+text.substring(0, 200), token)
+            sendTextMessage(sender, "Postback received: " + text.substring(0, 200), token)
             continue
         }
     }
     res.sendStatus(200)
 })
-
 
 var token = "EAALfyePA9ZCIBAG8FedZBnIPLxSpFLKgdCwRVozoOx90iZA9DU3a5d5tMnnZAUu5cZCb3sItvaxv7PKaUtx9KZBUFS6odRVe5PJRwiVHm5jzO6MgbVat6P2bCaXlJFt0pHTImztmJREBrQ360Oj4dgdBAleQ1qUke2WdbRl6VCnQZDZD"
 
